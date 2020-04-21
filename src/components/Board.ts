@@ -26,31 +26,28 @@ export default class Board {
     }
   }
 
-  getNextPosition(
-    { row, col }: CellPosition,
-    direction: Direction
-  ): CellPosition {
+  private getNextCell({ row, col }: CellPosition, direction: Direction): Cell {
     switch (direction) {
       case Direction.Left:
-        return {
-          row,
-          col: col - 1,
-        };
+        if (col === 0) {
+          return null;
+        }
+        return this.cells[row * this.colNum + col - 1];
       case Direction.Right:
-        return {
-          row,
-          col: col + 1,
-        };
+        if (col === this.colNum - 1) {
+          return null;
+        }
+        return this.cells[row * this.colNum + col + 1];
       case Direction.Up:
-        return {
-          row: row - 1,
-          col,
-        };
+        if (row === 0) {
+          return null;
+        }
+        return this.cells[(row - 1) * this.colNum + col];
       case Direction.Down:
-        return {
-          row: row + 1,
-          col,
-        };
+        if (row === this.rowNum - 1) {
+          return null;
+        }
+        return this.cells[(row + 1) * this.colNum + col];
       default:
         break;
     }
@@ -99,12 +96,8 @@ export default class Board {
     const oppositeDirection = getOppositeDirection(direction);
 
     const pullNextCell = (cell: Cell) => {
-      const position = { row: cell.row, col: cell.col };
-
-      const nextPosition = this.getNextPosition(position, oppositeDirection);
-      const nextCell = this.cells[
-        nextPosition.row * this.colNum + nextPosition.col
-      ];
+      const position = cell.getPosition();
+      const nextCell = this.getNextCell(position, oppositeDirection);
 
       if (!nextCell) {
         return;
