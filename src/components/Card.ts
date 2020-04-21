@@ -1,5 +1,20 @@
 export const INITIAL_VALUES = [1, 2];
 
+export const getMergeableValue = (value: number): number => {
+  if (value === 1) {
+    return 2;
+  }
+  if (value === 2) {
+    return 1;
+  }
+  return value;
+};
+
+export const isMergeable = (valueA: number, valueB: number): boolean => {
+  const mergeableValue = getMergeableValue(valueA);
+  return valueB === mergeableValue;
+};
+
 export default class Card {
   public el: HTMLDivElement;
   public visible: boolean = false;
@@ -38,21 +53,11 @@ export default class Card {
     this.el.style.visibility = visible ? "visible" : "hidden";
   }
 
-  isMergeable(valueA: number, valueB: number) {
-    if (valueA + valueB === 3) {
-      return true;
-    }
-    if ((valueA + valueB) % 3 !== 0) {
-      return false;
-    }
-    return valueA === valueB;
-  }
-
   merge(srcCard: Card) {
     const valueA = this.value;
     const valueB = srcCard.value;
 
-    if (!this.isMergeable(valueA, valueB)) {
+    if (!isMergeable(valueA, valueB)) {
       return false;
     }
 

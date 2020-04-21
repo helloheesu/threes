@@ -1,34 +1,33 @@
-import Card from "../Card";
+import Card, { isMergeable } from "../Card";
 
 describe("Card.ts", () => {
   describe("isMergeable", () => {
-    const card = new Card();
     test("1 + 1 = false", () => {
-      expect(card.isMergeable(1, 1)).toBe(false);
+      expect(isMergeable(1, 1)).toBe(false);
     });
     test("2 + 2 = false", () => {
-      expect(card.isMergeable(2, 2)).toBe(false);
+      expect(isMergeable(2, 2)).toBe(false);
     });
     test("1 + 2 = true", () => {
-      expect(card.isMergeable(1, 2)).toBe(true);
+      expect(isMergeable(1, 2)).toBe(true);
     });
     test("2 + 1 = true", () => {
-      expect(card.isMergeable(2, 1)).toBe(true);
+      expect(isMergeable(2, 1)).toBe(true);
     });
     test("3 + 3 = true", () => {
-      expect(card.isMergeable(3, 3)).toBe(true);
+      expect(isMergeable(3, 3)).toBe(true);
     });
     test("6 + 6 = true", () => {
-      expect(card.isMergeable(6, 6)).toBe(true);
+      expect(isMergeable(6, 6)).toBe(true);
     });
     test("3 + 1 = false", () => {
-      expect(card.isMergeable(3, 1)).toBe(false);
+      expect(isMergeable(3, 1)).toBe(false);
     });
     test("1 + 3 = false", () => {
-      expect(card.isMergeable(1, 3)).toBe(false);
+      expect(isMergeable(1, 3)).toBe(false);
     });
     test("3 + 6 = false", () => {
-      expect(card.isMergeable(3, 6)).toBe(false);
+      expect(isMergeable(3, 6)).toBe(false);
     });
   });
   describe("mergeable", () => {
