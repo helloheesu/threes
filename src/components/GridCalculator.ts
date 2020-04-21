@@ -16,6 +16,7 @@ export default class GridCalculator implements Renderer {
   }
 
   appendChild(el: HTMLElement) {
+    el.classList.add("render-component");
     this.container.appendChild(el);
   }
 

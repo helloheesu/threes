@@ -1,6 +1,7 @@
 import "./game.css";
 
 import Board from "./Board";
+import Card, { INITIAL_VALUES } from "./Card";
 
 type Props = {
   container: HTMLDivElement;
@@ -8,9 +9,13 @@ type Props = {
   col: number;
 };
 export default class GameManager {
-  board: Board;
-
   constructor({ container, row, col }: Props) {
-    this.board = new Board(container, row, col);
+    const board = new Board(container, row, col);
+
+    for (let i = 0; i < 4; i++) {
+      const card = new Card(INITIAL_VALUES[i % INITIAL_VALUES.length]);
+      const position = board.getRandomEmptyPosition();
+      board.fill(position, card);
+    }
   }
 }

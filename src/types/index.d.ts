@@ -16,3 +16,7 @@ interface Renderer {
   appendChild(el: HTMLElement);
   setPosition(el: HTMLDivElement, cellPosition: CellPosition);
 }
+
+interface Component {
+  el: HTMLDivElement;
+}

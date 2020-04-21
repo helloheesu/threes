@@ -23,4 +23,18 @@ export default class Board {
       }
     }
   }
+
+  getRandomEmptyPosition(): CellPosition {
+    const emptyCells = this.cells.filter((cell) => cell.isEmpty());
+    const randomIndex = Math.floor(Math.random() * emptyCells.length);
+    const cell = emptyCells[randomIndex];
+    return { row: cell.row, col: cell.col };
+  }
+
+  fill(position: CellPosition, content: Component) {
+    const { row, col } = position;
+    this.cells[row * this.colNum + col].fill(content);
+    this.renderer.appendChild(content.el);
+    this.renderer.setPosition(content.el, position);
+  }
 }

@@ -1,6 +1,6 @@
 export default class Cell {
   public el: HTMLDivElement;
-  private content: any = null;
+  private content: Component = null;
 
   constructor(
     private renderer: Renderer,
@@ -18,7 +18,7 @@ export default class Cell {
     return !this.content;
   }
 
-  fill(content: any) {
+  fill(content: Component) {
     this.content = content;
   }
 }

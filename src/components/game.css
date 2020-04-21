@@ -4,8 +4,15 @@
   position: relative;
 }
 
-.board .cell {
+.board .render-component {
   display: inline-block;
   position: absolute;
+}
+
+.board .cell {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.board .card {
+  text-align: center;
 }
