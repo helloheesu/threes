@@ -3,7 +3,7 @@ const isMergable = (valueA: number, valueB: number) => {
   return (valueA + valueB) % 3 === 0;
 };
 
-export default class Card implements Component {
+export default class Card {
   public el: HTMLDivElement;
 
   constructor(private value: number = INITIAL_VALUES[0]) {

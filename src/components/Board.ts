@@ -2,6 +2,7 @@ import Cell from "./Cell";
 import GridCalculator from "./GridCalculator";
 import { getOppositeDirection, getNextPosition } from "./PositionCalculator";
 import { Direction } from "../enum";
+import Card from "./Card";
 
 export default class Board {
   public el: HTMLDivElement;
@@ -33,7 +34,7 @@ export default class Board {
     return { row: cell.row, col: cell.col };
   }
 
-  fill(position: CellPosition, content: Component) {
+  fill(position: CellPosition, content: Card) {
     const { row, col } = position;
     this.cells[row * this.colNum + col].fill(content);
     this.renderer.appendChild(content.el);

@@ -1,6 +1,8 @@
+import Card from "./Card";
+
 export default class Cell {
   public el: HTMLDivElement;
-  private content: Component = null;
+  private content: Card = null;
 
   constructor(
     private renderer: Renderer,
@@ -18,7 +20,7 @@ export default class Cell {
     return !this.content;
   }
 
-  fill(content: Component) {
+  fill(content: Card) {
     this.content = content;
   }
 
