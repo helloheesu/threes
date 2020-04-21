@@ -2,7 +2,7 @@ export default class GridCalculator implements Renderer {
   private cellWidth: number;
   private cellHeight: number;
   constructor(
-    container: HTMLDivElement,
+    private container: HTMLDivElement,
     rowNum: number,
     colNum: number,
     private margin: number
@@ -13,6 +13,10 @@ export default class GridCalculator implements Renderer {
 
     this.cellWidth = (containerWidth - this.margin * (colNum + 1)) / colNum;
     this.cellHeight = (containerHeight - this.margin * (rowNum + 1)) / rowNum;
+  }
+
+  appendChild(el: HTMLElement) {
+    this.container.appendChild(el);
   }
 
   private getPosition(rowIndex: number, colIndex: number): DomPosition {

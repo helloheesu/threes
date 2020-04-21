@@ -3,16 +3,14 @@ export default class Cell {
   private content: any = null;
 
   constructor(
-    private container: HTMLDivElement,
+    private renderer: Renderer,
     public row: number,
-    public col: number,
-    private renderer: Renderer
+    public col: number
   ) {
     this.el = document.createElement("div");
     this.el.classList.add("cell");
 
-    this.container.appendChild(this.el);
-
+    this.renderer.appendChild(this.el);
     this.renderer.setPosition(this.el, { row: this.row, col: this.col });
   }
 

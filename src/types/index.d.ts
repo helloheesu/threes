@@ -13,5 +13,6 @@ type CellPosition = {
 };
 
 interface Renderer {
+  appendChild(el: HTMLElement);
   setPosition(el: HTMLDivElement, cellPosition: CellPosition);
 }
