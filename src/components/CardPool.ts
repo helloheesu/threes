@@ -25,4 +25,8 @@ export default class CardPool {
     this.cards.push(newCard);
     return newCard;
   }
+
+  getVisibleCards(): Card[] {
+    return this.cards.filter((card) => card.isVisible());
+  }
 }

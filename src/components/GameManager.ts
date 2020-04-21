@@ -1,7 +1,7 @@
 import "./game.css";
 
 import Board from "./Board";
-import { INITIAL_VALUES } from "./Card";
+import { INITIAL_VALUES, getMergeableValue } from "./Card";
 import {
   Direction,
   isDirection,
@@ -29,7 +29,12 @@ const insertRandomCards = (cardCount: number) => {
 };
 
 const getNextValues = (): number => {
-  return getRandomElement(INITIAL_VALUES);
+  const cardValues = cardPool.getVisibleCards().map((card) => card.getValue());
+  const values = cardValues
+    .filter((value) => INITIAL_VALUES.includes(value))
+    .map((value) => getMergeableValue(value));
+
+  return getRandomElement(values.length ? values : INITIAL_VALUES);
 };
 
 const move = (direction: Direction, newCardProbability: number) => {
