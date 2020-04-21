@@ -1,7 +1,6 @@
 import Cell from "./Cell";
 import GridCalculator from "./GridCalculator";
-import { getOppositeDirection, getNextPosition } from "./PositionCalculator";
-import { Direction } from "../enum";
+import { Direction, getOppositeDirection } from "../types/Direction";
 import Card from "./Card";
 
 export default class Board {
@@ -24,6 +23,36 @@ export default class Board {
       for (let colIndex = 0; colIndex < colNum; colIndex++) {
         this.cells.push(new Cell(this.renderer, rowIndex, colIndex));
       }
+    }
+  }
+
+  getNextPosition(
+    { row, col }: CellPosition,
+    direction: Direction
+  ): CellPosition {
+    switch (direction) {
+      case Direction.Left:
+        return {
+          row,
+          col: col - 1,
+        };
+      case Direction.Right:
+        return {
+          row,
+          col: col + 1,
+        };
+      case Direction.Up:
+        return {
+          row: row - 1,
+          col,
+        };
+      case Direction.Down:
+        return {
+          row: row + 1,
+          col,
+        };
+      default:
+        break;
     }
   }
 
@@ -72,7 +101,7 @@ export default class Board {
     const pullNextCell = (cell: Cell) => {
       const position = { row: cell.row, col: cell.col };
 
-      const nextPosition = getNextPosition(position, oppositeDirection);
+      const nextPosition = this.getNextPosition(position, oppositeDirection);
       const nextCell = this.cells[
         nextPosition.row * this.colNum + nextPosition.col
       ];

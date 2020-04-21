@@ -1,34 +1,9 @@
-import { Direction } from "../enum";
-
-export const getNextPosition = (
-  { row, col }: CellPosition,
-  direction: Direction
-): CellPosition => {
-  switch (direction) {
-    case Direction.Left:
-      return {
-        row,
-        col: col - 1,
-      };
-    case Direction.Right:
-      return {
-        row,
-        col: col + 1,
-      };
-    case Direction.Up:
-      return {
-        row: row - 1,
-        col,
-      };
-    case Direction.Down:
-      return {
-        row: row + 1,
-        col,
-      };
-    default:
-      break;
-  }
-};
+export enum Direction {
+  Left = "Left",
+  Right = "Right",
+  Up = "Up",
+  Down = "Down",
+}
 
 export const getOppositeDirection = (direction: Direction): Direction => {
   switch (direction) {

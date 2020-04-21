@@ -1,9 +1,8 @@
 import "./game.css";
 
 import Board from "./Board";
-import Card, { INITIAL_VALUES } from "./Card";
-import { isDirection } from "./PositionCalculator";
-import { Direction } from "../enum";
+import { INITIAL_VALUES } from "./Card";
+import { Direction, isDirection } from "../types/Direction";
 import CardPool from "./CardPool";
 
 type Props = {
