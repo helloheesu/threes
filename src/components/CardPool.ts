@@ -8,7 +8,8 @@ export default class CardPool {
   constructor(private renderer: Renderer) {
     this.cards = new Array(poolSize);
     for (let i = 0; i < this.cards.length; i++) {
-      this.cards[i] = new Card(this.renderer);
+      this.cards[i] = new Card();
+      this.renderer.appendChild(this.cards[i].el);
     }
   }
 
@@ -20,6 +21,7 @@ export default class CardPool {
     }
 
     const newCard = new Card(value);
+    this.renderer.appendChild(newCard.el);
     this.cards.push(newCard);
     return newCard;
   }

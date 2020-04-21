@@ -8,10 +8,9 @@ export default class Card {
   public visible: boolean = false;
   private value: number;
 
-  constructor(private renderer: Renderer, value?: number) {
+  constructor(value?: number) {
     this.el = document.createElement("div");
     this.el.classList.add("card");
-    this.renderer.appendChild(this.el);
 
     if (!value) {
       return;
