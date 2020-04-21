@@ -16,6 +16,13 @@ export default class Cell {
     this.renderer.setPosition(this.el, { row: this.row, col: this.col });
   }
 
+  getPosition(): CellPosition {
+    return {
+      row: this.row,
+      col: this.col,
+    };
+  }
+
   isEmpty(): boolean {
     return !this.content;
   }
@@ -26,6 +33,10 @@ export default class Cell {
 
   empty() {
     this.content = null;
+  }
+
+  getContent(): Card {
+    return this.content;
   }
 
   mergeContentInto(destinationCell: Cell) {

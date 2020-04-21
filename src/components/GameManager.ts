@@ -14,7 +14,7 @@ type Props = {
 export default class GameManager {
   constructor({ container, row, col }: Props) {
     const board = new Board(container, row, col);
-    const cardPool = new CardPool();
+    const cardPool = new CardPool(board.renderer);
 
     for (let i = 0; i < 4; i++) {
       const card = cardPool.generateCard(
@@ -23,6 +23,7 @@ export default class GameManager {
       const position = board.getRandomEmptyPosition();
       board.fill(position, card);
     }
+    board.render();
 
     document.addEventListener("keyup", ({ key }) => {
       const m = key.match(/Arrow(\w*)/);
@@ -31,6 +32,7 @@ export default class GameManager {
       }
 
       board.move(m[1] as Direction);
+      board.render();
     });
   }
 }

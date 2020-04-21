@@ -7,7 +7,7 @@ import Card from "./Card";
 export default class Board {
   public el: HTMLDivElement;
   private cells: Cell[] = [];
-  private renderer: Renderer;
+  public renderer: Renderer;
 
   constructor(
     private container: HTMLDivElement,
@@ -34,11 +34,20 @@ export default class Board {
     return { row: cell.row, col: cell.col };
   }
 
-  fill(position: CellPosition, content: Card) {
-    const { row, col } = position;
+  fill({ row, col }: CellPosition, content: Card) {
     this.cells[row * this.colNum + col].fill(content);
-    this.renderer.appendChild(content.el);
-    this.renderer.setPosition(content.el, position);
+  }
+
+  render() {
+    this.cells.forEach((cell) => {
+      const content = cell.getContent();
+      if (!content) {
+        return;
+      }
+
+      const position = cell.getPosition();
+      this.renderer.setPosition(content.el, position);
+    });
   }
 
   getEdgeCells(direction: Direction): Cell[] {

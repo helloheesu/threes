@@ -5,10 +5,10 @@ const poolSize = 10;
 export default class CardPool {
   private cards: Card[];
 
-  constructor() {
+  constructor(private renderer: Renderer) {
     this.cards = new Array(poolSize);
     for (let i = 0; i < this.cards.length; i++) {
-      this.cards[i] = new Card();
+      this.cards[i] = new Card(this.renderer);
     }
   }
 
