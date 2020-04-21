@@ -12,6 +12,11 @@ import CardPool from "./CardPool";
 let board: Board;
 let cardPool: CardPool;
 
+const getRandomElement = <T>(array: Array<T>): T => {
+  const index = Math.floor(Math.random() * array.length);
+  return array[index];
+};
+
 const insertRandomCards = (cardCount: number) => {
   for (let i = 0; i < cardCount; i++) {
     const card = cardPool.generateCard(
@@ -24,8 +29,7 @@ const insertRandomCards = (cardCount: number) => {
 };
 
 const getNextValues = (): number => {
-  const index = Math.floor(Math.random() * INITIAL_VALUES.length);
-  return INITIAL_VALUES[index];
+  return getRandomElement(INITIAL_VALUES);
 };
 
 const move = (direction: Direction, newCardProbability: number) => {
@@ -35,9 +39,7 @@ const move = (direction: Direction, newCardProbability: number) => {
     const emptyEdgeCells = board
       .getEdgeCells(oppositeDirection)
       .filter((cell) => cell.isEmpty());
-    const position = emptyEdgeCells[
-      Math.floor(Math.random() * emptyEdgeCells.length)
-    ].getPosition();
+    const position = getRandomElement(emptyEdgeCells).getPosition();
 
     const value = getNextValues();
     const card = cardPool.generateCard(value);
