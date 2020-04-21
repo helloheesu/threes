@@ -2,13 +2,13 @@ import Card from "../Card";
 
 describe("Card.ts", () => {
   describe("mergeable", () => {
-    test("1 + 1 != mergable", () => {
+    test("1 + 1 != mergeable", () => {
       const cardA = new Card(1);
       const cardB = new Card(1);
       const merged = cardA.merge(cardB);
       expect(merged).toBe(false);
     });
-    test("2 + 2 != mergable", () => {
+    test("2 + 2 != mergeable", () => {
       const cardA = new Card(2);
       const cardB = new Card(2);
       const merged = cardA.merge(cardB);
@@ -35,7 +35,7 @@ describe("Card.ts", () => {
       expect(merged).toBe(true);
       expect(cardA.getValue()).toBe(9);
     });
-    test("3 + 9 != mergable", () => {
+    test("3 + 9 != mergeable", () => {
       const cardA = new Card(3);
       const cardB = new Card(9);
       const merged = cardA.merge(cardB);
