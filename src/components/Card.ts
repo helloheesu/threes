@@ -38,18 +38,25 @@ export default class Card {
     this.el.style.visibility = visible ? "visible" : "hidden";
   }
 
+  isMergeable(valueA: number, valueB: number) {
+    if (valueA + valueB === 3) {
+      return true;
+    }
+    if ((valueA + valueB) % 3 !== 0) {
+      return false;
+    }
+    return valueA === valueB;
+  }
+
   merge(srcCard: Card) {
     const valueA = this.value;
     const valueB = srcCard.value;
 
-    if (valueA + valueB === 3) {
-      this.setValue(valueA + valueB);
-    } else if (valueA !== valueB || valueA === 1 || valueA === 2) {
+    if (!this.isMergeable(valueA, valueB)) {
       return false;
-    } else {
-      this.setValue(this.value * 3);
     }
 
+    this.setValue(valueA + valueB);
     srcCard.setVisible(false);
 
     return true;
