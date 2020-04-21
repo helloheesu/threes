@@ -1,7 +1,4 @@
 export const INITIAL_VALUES = [1, 2];
-const isMergable = (valueA: number, valueB: number) => {
-  return (valueA + valueB) % 3 === 0;
-};
 
 export default class Card {
   public el: HTMLDivElement;
@@ -24,6 +21,10 @@ export default class Card {
     this.setVisible(true);
   }
 
+  getValue(): number {
+    return this.value;
+  }
+
   isVisible(): boolean {
     return this.visible;
   }
@@ -37,12 +38,20 @@ export default class Card {
     this.el.style.visibility = visible ? "visible" : "hidden";
   }
 
-  isMergable(srcCard: Card) {
-    return isMergable(this.value, srcCard.value);
-  }
-
   merge(srcCard: Card) {
-    this.setValue(this.value + srcCard.value);
+    const valueA = this.value;
+    const valueB = srcCard.value;
+
+    if (valueA + valueB === 3) {
+      this.setValue(valueA + valueB);
+    } else if (valueA !== valueB || valueA === 1 || valueA === 2) {
+      return false;
+    } else {
+      this.setValue(this.value * 3);
+    }
+
     srcCard.setVisible(false);
+
+    return true;
   }
 }

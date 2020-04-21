@@ -53,11 +53,10 @@ export default class Cell {
       return true;
     }
 
-    if (!destinationContent.isMergable(srcContent)) {
+    const merged = destinationContent.merge(srcContent);
+    if (!merged) {
       return false;
     }
-
-    destinationContent.merge(srcContent);
     this.empty();
     return true;
   }
