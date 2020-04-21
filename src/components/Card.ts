@@ -5,12 +5,27 @@ const isMergable = (valueA: number, valueB: number) => {
 
 export default class Card {
   public el: HTMLDivElement;
+  public visible: boolean = false;
+  private value: number;
 
-  constructor(private value: number = INITIAL_VALUES[0]) {
-    const el = document.createElement("div");
-    el.classList.add("card");
-    el.innerText = `${value}`;
-    this.el = el;
+  constructor(value?: number) {
+    this.el = document.createElement("div");
+    this.el.classList.add("card");
+
+    if (!value) {
+      return;
+    }
+    this.setValue(value);
+  }
+
+  setValue(value: number) {
+    this.value = value;
+    this.el.innerText = `${value}`;
+    this.visible = true;
+  }
+
+  isVisible(): boolean {
+    return this.visible;
   }
 
   isMergable(srcCard: Card) {

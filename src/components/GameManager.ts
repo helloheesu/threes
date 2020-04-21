@@ -4,6 +4,7 @@ import Board from "./Board";
 import Card, { INITIAL_VALUES } from "./Card";
 import { isDirection } from "./PositionCalculator";
 import { Direction } from "../enum";
+import CardPool from "./CardPool";
 
 type Props = {
   container: HTMLDivElement;
@@ -13,9 +14,12 @@ type Props = {
 export default class GameManager {
   constructor({ container, row, col }: Props) {
     const board = new Board(container, row, col);
+    const cardPool = new CardPool();
 
     for (let i = 0; i < 4; i++) {
-      const card = new Card(INITIAL_VALUES[i % INITIAL_VALUES.length]);
+      const card = cardPool.generateCard(
+        INITIAL_VALUES[i % INITIAL_VALUES.length]
+      );
       const position = board.getRandomEmptyPosition();
       board.fill(position, card);
     }
