@@ -17,7 +17,7 @@ export default class Board {
 
         this.el.appendChild(cell);
 
-        this.renderer.setPosition(cell, rowIndex, colIndex);
+        this.renderer.setPosition(cell, { row: rowIndex, col: colIndex });
       }
     }
 

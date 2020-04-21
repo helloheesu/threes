@@ -7,6 +7,11 @@ type DomSize = {
   height: number;
 };
 
+type CellPosition = {
+  row: number;
+  col: number;
+};
+
 interface Renderer {
-  setPosition(el: HTMLDivElement, rowIndex: number, colIndex: number);
+  setPosition(el: HTMLDivElement, cellPosition: CellPosition);
 }

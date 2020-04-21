@@ -29,9 +29,9 @@ export default class GridCalculator implements Renderer {
     };
   }
 
-  setPosition(el: HTMLDivElement, rowIndex: number, colIndex: number) {
+  setPosition(el: HTMLDivElement, { row, col }: CellPosition) {
     const { width, height } = this.getSize();
-    const { top, left } = this.getPosition(rowIndex, colIndex);
+    const { top, left } = this.getPosition(row, col);
 
     el.style.width = `${width}px`;
     el.style.height = `${height}px`;
