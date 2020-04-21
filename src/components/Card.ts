@@ -22,11 +22,20 @@ export default class Card {
   setValue(value: number) {
     this.value = value;
     this.el.innerText = `${value}`;
-    this.visible = true;
+    this.setVisible(true);
   }
 
   isVisible(): boolean {
     return this.visible;
+  }
+
+  setVisible(visible: boolean) {
+    if (this.visible === visible) {
+      return;
+    }
+
+    this.visible = visible;
+    this.el.style.visibility = visible ? "visible" : "hidden";
   }
 
   isMergable(srcCard: Card) {
@@ -34,6 +43,7 @@ export default class Card {
   }
 
   merge(srcCard: Card) {
-    this.value += srcCard.value;
+    this.setValue(this.value + srcCard.value);
+    srcCard.setVisible(false);
   }
 }
