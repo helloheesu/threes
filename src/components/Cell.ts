@@ -21,4 +21,30 @@ export default class Cell {
   fill(content: Component) {
     this.content = content;
   }
+
+  empty() {
+    this.content = null;
+  }
+
+  mergeContentInto(destinationCell: Cell) {
+    const srcContent = this.content;
+    const destinationContent = destinationCell.content;
+
+    if (!srcContent) {
+      return;
+    }
+
+    if (!destinationContent) {
+      destinationCell.fill(this.content);
+      this.empty();
+      return;
+    }
+
+    if (!destinationContent.isMergable(srcContent)) {
+      return;
+    }
+
+    destinationContent.merge(srcContent);
+    this.empty();
+  }
 }

@@ -19,4 +19,6 @@ interface Renderer {
 
 interface Component {
   el: HTMLDivElement;
+  isMergable(srcContent: Component): boolean;
+  merge(srcContent: Component);
 }

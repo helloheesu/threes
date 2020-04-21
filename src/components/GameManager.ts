@@ -2,6 +2,8 @@ import "./game.css";
 
 import Board from "./Board";
 import Card, { INITIAL_VALUES } from "./Card";
+import { isDirection } from "./PositionCalculator";
+import { Direction } from "../enum";
 
 type Props = {
   container: HTMLDivElement;
@@ -17,5 +19,14 @@ export default class GameManager {
       const position = board.getRandomEmptyPosition();
       board.fill(position, card);
     }
+
+    document.addEventListener("keyup", ({ key }) => {
+      const m = key.match(/Arrow(\w*)/);
+      if (!m || !isDirection(m[1])) {
+        return;
+      }
+
+      board.move(m[1] as Direction);
+    });
   }
 }
