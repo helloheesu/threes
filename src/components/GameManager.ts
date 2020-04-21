@@ -10,13 +10,14 @@ type Props = {
   container: HTMLDivElement;
   row: number;
   col: number;
+  initialCardCount: number;
 };
 export default class GameManager {
-  constructor({ container, row, col }: Props) {
+  constructor({ container, row, col, initialCardCount }: Props) {
     const board = new Board(container, row, col);
     const cardPool = new CardPool(board.renderer);
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < initialCardCount; i++) {
       const card = cardPool.generateCard(
         INITIAL_VALUES[i % INITIAL_VALUES.length]
       );
