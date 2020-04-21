@@ -7,5 +7,5 @@ new Game({
   row: 4,
   col: 4,
   initialCardCount: 4,
-  newCardProbability: 0.9,
+  newCardProbability: 0.7,
 });
