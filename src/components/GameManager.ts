@@ -2,7 +2,11 @@ import "./game.css";
 
 import Board from "./Board";
 import { INITIAL_VALUES } from "./Card";
-import { Direction, isDirection } from "../types/Direction";
+import {
+  Direction,
+  isDirection,
+  getOppositeDirection,
+} from "../types/Direction";
 import CardPool from "./CardPool";
 
 type Props = {
@@ -10,9 +14,16 @@ type Props = {
   row: number;
   col: number;
   initialCardCount: number;
+  newCardProbability: number;
 };
 export default class GameManager {
-  constructor({ container, row, col, initialCardCount }: Props) {
+  constructor({
+    container,
+    row,
+    col,
+    initialCardCount,
+    newCardProbability,
+  }: Props) {
     const board = new Board(container, row, col);
     const cardPool = new CardPool(board.renderer);
 
@@ -31,7 +42,22 @@ export default class GameManager {
         return;
       }
 
-      board.move(m[1] as Direction);
+      const direction = m[1] as Direction;
+      const movedCells = board.move(direction);
+      if (movedCells.length && Math.random() <= newCardProbability) {
+        const oppositeDirection = getOppositeDirection(direction);
+        const emptyEdgeCells = board
+          .getEdgeCells(oppositeDirection)
+          .filter((cell) => cell.isEmpty());
+        const position = emptyEdgeCells[
+          Math.floor(Math.random() * emptyEdgeCells.length)
+        ].getPosition();
+
+        const index = Math.floor(Math.random() * INITIAL_VALUES.length);
+        const card = cardPool.generateCard(INITIAL_VALUES[index]);
+
+        board.fill(position, card);
+      }
       board.render();
     });
   }

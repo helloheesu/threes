@@ -39,25 +39,26 @@ export default class Cell {
     return this.content;
   }
 
-  mergeContentInto(destinationCell: Cell) {
+  mergeContentInto(destinationCell: Cell): boolean {
     const srcContent = this.content;
     const destinationContent = destinationCell.content;
 
     if (!srcContent) {
-      return;
+      return false;
     }
 
     if (!destinationContent) {
       destinationCell.fill(this.content);
       this.empty();
-      return;
+      return true;
     }
 
     if (!destinationContent.isMergable(srcContent)) {
-      return;
+      return false;
     }
 
     destinationContent.merge(srcContent);
     this.empty();
+    return true;
   }
 }

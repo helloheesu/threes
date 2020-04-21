@@ -91,9 +91,11 @@ export default class Board {
     }
   }
 
-  move(direction: Direction) {
+  move(direction: Direction): Cell[] {
     const edgeCells = this.getEdgeCells(direction);
     const oppositeDirection = getOppositeDirection(direction);
+
+    const movedCells = [];
 
     const pullNextCell = (cell: Cell) => {
       const position = cell.getPosition();
@@ -103,10 +105,16 @@ export default class Board {
         return;
       }
 
-      nextCell.mergeContentInto(cell);
+      const merged = nextCell.mergeContentInto(cell);
+      if (merged) {
+        movedCells.push(nextCell);
+      }
+
       pullNextCell(nextCell);
     };
 
     edgeCells.forEach((cell) => pullNextCell(cell));
+
+    return movedCells;
   }
 }
