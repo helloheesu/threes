@@ -31,6 +31,8 @@ export default class Card {
   }
 
   setValue(value: number) {
+    this.setVisible(true);
+
     if (this.value === value) {
       return;
     }
@@ -40,7 +42,6 @@ export default class Card {
     this.value = value;
     this.el.innerText = `${value}`;
     this.el.classList.add(`card-${value}`);
-    this.setVisible(true);
   }
 
   getValue(): number {
