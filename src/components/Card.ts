@@ -31,8 +31,15 @@ export default class Card {
   }
 
   setValue(value: number) {
+    if (this.value === value) {
+      return;
+    }
+
+    this.el.classList.remove(`card-${this.value}`);
+
     this.value = value;
     this.el.innerText = `${value}`;
+    this.el.classList.add(`card-${value}`);
     this.setVisible(true);
   }
 

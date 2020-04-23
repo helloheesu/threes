@@ -16,3 +16,15 @@
 .board .card {
   text-align: center;
 }
+
+.card {
+  background-color: white;
+}
+.card.card-1 {
+  background-color: pink;
+  color: white;
+}
+.card.card-2 {
+  background-color: lightskyblue;
+  color: white;
+}
